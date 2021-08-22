@@ -1,3 +1,5 @@
+package com.udacity.jdnd.course3.critter.schedule;
+import java.time.LocalDate;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Schedule {

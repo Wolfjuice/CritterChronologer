@@ -1,3 +1,8 @@
+package com.udacity.jdnd.course3.critter.pet;
+import java.time.LocalDate;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Pet {

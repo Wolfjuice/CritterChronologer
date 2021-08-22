@@ -1,3 +1,4 @@
+package com.udacity.jdnd.course3.critter.user;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Employee {
