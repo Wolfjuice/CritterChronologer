@@ -2,6 +2,7 @@ package com.udacity.jdnd.course3.critter.pet;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,24 +11,68 @@ import java.util.List;
 @RestController
 @RequestMapping("/pet")
 public class PetController {
+    private final PetService petService;
+
+    PetController(PetService petService) {
+        this.petService = petService;
+    }
 
     @PostMapping
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
-        throw new UnsupportedOperationException();
+        petService.save(petDTO);
+        return petDTO;
     }
 
     @GetMapping("/{petId}")
     public PetDTO getPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
+        PetDTO tobereturned = new PetDTO();
+        Pet apet = petService.getById(petId);
+        tobereturned.setId(apet.getId());
+        tobereturned.setName(apet.getName());
+        tobereturned.setBirthDate(apet.getBirthDate());
+        tobereturned.setType(apet.getType());
+        tobereturned.setOwnerId(apet.getOwnerId());
+        tobereturned.setNotes(apet.getNotes());
+        return tobereturned;
+
     }
 
     @GetMapping
     public List<PetDTO> getPets(){
-        throw new UnsupportedOperationException();
+
+        List<Pet> petlist = petService.getAll();
+        List<PetDTO> returnpetlist = new ArrayList<>();
+        for(int i = 0; i < petlist.size(); i++){
+            PetDTO tobereturned = new PetDTO();
+            Pet apet = petlist.get(i);
+            tobereturned.setId(apet.getId());
+            tobereturned.setName(apet.getName());
+            tobereturned.setBirthDate(apet.getBirthDate());
+            tobereturned.setType(apet.getType());
+            tobereturned.setOwnerId(apet.getOwnerId());
+            tobereturned.setNotes(apet.getNotes());
+            returnpetlist.add(tobereturned);
+        }
+        return returnpetlist;
     }
 
     @GetMapping("/owner/{ownerId}")
     public List<PetDTO> getPetsByOwner(@PathVariable long ownerId) {
-        throw new UnsupportedOperationException();
+        List<Pet> petlist = petService.getPetsByOwner(ownerId);
+        List<PetDTO> returnpetlist = new ArrayList<>();
+        for(int i = 0; i < petlist.size(); i++){
+            PetDTO tobereturned = new PetDTO();
+            Pet apet = petlist.get(i);
+            tobereturned.setId(apet.getId());
+            tobereturned.setName(apet.getName());
+            tobereturned.setBirthDate(apet.getBirthDate());
+            tobereturned.setType(apet.getType());
+            tobereturned.setOwnerId(apet.getOwnerId());
+            tobereturned.setNotes(apet.getNotes());
+            returnpetlist.add(tobereturned);
+        }
+        return returnpetlist;
+    }
+
     }
 }

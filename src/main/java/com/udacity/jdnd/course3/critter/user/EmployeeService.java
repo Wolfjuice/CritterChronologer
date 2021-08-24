@@ -11,9 +11,8 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class UserService {
+public class EmployeeService {
     @Autowired
-    CostomerRepository costomerRepository;
     EmployeeRepository employeeRepository;
 
     public void saveCustomer(CustomerDTO customerDTO){
