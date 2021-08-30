@@ -31,7 +31,7 @@ public class PetController {
         tobereturned.setName(apet.getName());
         tobereturned.setBirthDate(apet.getBirthDate());
         tobereturned.setType(apet.getType());
-        tobereturned.setOwnerId(apet.getOwnerId());
+        tobereturned.setOwnerId(apet.getCustomer().getId());
         tobereturned.setNotes(apet.getNotes());
         return tobereturned;
 
@@ -49,7 +49,7 @@ public class PetController {
             tobereturned.setName(apet.getName());
             tobereturned.setBirthDate(apet.getBirthDate());
             tobereturned.setType(apet.getType());
-            tobereturned.setOwnerId(apet.getOwnerId());
+            tobereturned.setOwnerId(apet.getCustomer().getId());
             tobereturned.setNotes(apet.getNotes());
             returnpetlist.add(tobereturned);
         }
@@ -67,12 +67,12 @@ public class PetController {
             tobereturned.setName(apet.getName());
             tobereturned.setBirthDate(apet.getBirthDate());
             tobereturned.setType(apet.getType());
-            tobereturned.setOwnerId(apet.getOwnerId());
+            tobereturned.setOwnerId(apet.getCustomer().getId());
             tobereturned.setNotes(apet.getNotes());
             returnpetlist.add(tobereturned);
         }
         return returnpetlist;
     }
 
-    }
+
 }

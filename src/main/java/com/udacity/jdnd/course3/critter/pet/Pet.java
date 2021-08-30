@@ -1,30 +1,27 @@
 package com.udacity.jdnd.course3.critter.pet;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.udacity.jdnd.course3.critter.user.Costomer;
 import javax.persistence.*;
-
 import java.time.LocalDate;
-
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Pet {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
     private PetType type;
-
-
     private String name;
-
-    private long ownerId;
-
-
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ownerId")
+    private Costomer customer; // ownerId;
     private LocalDate birthDate;
-
-
     private String notes;
-
+    public Costomer getCustomer() {
+        return customer;
+    }
+    public void setCustomer(Costomer customer) {
+        this.customer = customer;
+    }
     public Long getId(){
         return id;
     }
@@ -42,12 +39,6 @@ public class Pet {
     }
     public void setName(String name){
         this.name = name;
-    }
-    public long getOwnerId(){
-        return ownerId;
-    }
-    public void setOwnerId(long ownerId){
-        this.ownerId = ownerId;
     }
     public LocalDate getBirthDate(){
         return birthDate;

@@ -15,29 +15,22 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public void saveCustomer(CustomerDTO customerDTO){
-        CustomerDTO -> Customer
-        costomerRepository.save()
-    }
-
-    public List<CustomerDTO> getAllCustomers(){
-        List<CustomerDTO> listentity = costomerRepository.getall();
-
-    }
-
-    public CustomerDTO getOwnerByPet(long petId){
-        costomerRepository.getbypetid(petId);
-        return Customer -> CustomerDTO
-    }
 
     public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) {
-        EmployeeDTO -> Employee
-        employeeRepository.save()
+        Employee aemployee = new Employee();
+        aemployee.setId(employeeDTO.getId());
+        aemployee.setName(employeeDTO.getName());
+        aemployee.setSkills(employeeDTO.getSkills());
+        aemployee.setDaysAvailable(employeeDTO.getDaysAvailable());
+        employeeRepository.persist(aemployee);
+        return employeeDTO;
     }
 
-//    public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-//        throw new UnsupportedOperationException();
-//    }
+    public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
+        Employee xdd = employeeRepository.find(employeeId);
+        xdd.setDaysAvailable(daysAvailable);
+        employeeRepository.merge(xdd);
+    }
 
 
     public List<EmployeeDTO> findEmployeesForService(EmployeeRequestDTO employeeDTO) {

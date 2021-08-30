@@ -1,5 +1,6 @@
 package com.udacity.jdnd.course3.critter.user;
 import java.time.LocalDate;
+import java.util.Set;
 import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
