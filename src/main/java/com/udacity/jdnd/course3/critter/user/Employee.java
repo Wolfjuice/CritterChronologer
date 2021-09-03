@@ -11,7 +11,20 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+
+    @ElementCollection
+    @CollectionTable(
+     name="Skill",
+     joinColumns = @JoinColumn(name="id"), uniqueConstraints = @UniqueConstraint(columnNames = {"ID", "SKILL"}))
+    @Column(name="skill")
     private Set<EmployeeSkill> skills;
+
+    @ElementCollection
+    @CollectionTable(
+     name="Day",
+     joinColumns = @JoinColumn(name="id"), uniqueConstraints = @UniqueConstraint(columnNames = {"ID", "DAY"}))
+    @Column(name="day")
     private Set<DayOfWeek> daysAvailable;
 
     public Long getId() {

@@ -13,10 +13,17 @@ import java.util.Set;
 public class ScheduleDTO {
     private long id;
     private List<Long> employeeIds;
+    private List<Long> costomerIds;
     private List<Long> petIds;
     private LocalDate date;
     private Set<EmployeeSkill> activities;
 
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
     public List<Long> getEmployeeIds() {
         return employeeIds;
     }
@@ -31,6 +38,14 @@ public class ScheduleDTO {
 
     public void setPetIds(List<Long> petIds) {
         this.petIds = petIds;
+    }
+
+    public List<Long> getCostomerIds() {
+        return costomerIds;
+    }
+
+    public void setCostomerIds(List<Long> costomerIds) {
+        this.costomerIds = costomerIds;
     }
 
     public LocalDate getDate() {

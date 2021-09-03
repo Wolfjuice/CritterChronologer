@@ -1,9 +1,11 @@
 package com.udacity.jdnd.course3.critter.schedule;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.udacity.jdnd.course3.critter.pet.Pet;
+import com.udacity.jdnd.course3.critter.user.Costomer;
+import com.udacity.jdnd.course3.critter.user.Employee;
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -15,19 +17,74 @@ public class Schedule {
     @GeneratedValue
     private Long id;
 
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "schedule", cascade = CascadeType.ALL)
+    private List<Employee> employees;
 
-    private List<Long> employeeIds;
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "schedule", cascade = CascadeType.ALL)
+    private List<Costomer> customers;
 
-    private List<Long> petIds;
+
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "schedule", cascade = CascadeType.ALL)
+    private List<Pet> pets;
 
     private LocalDate date;
 
-
+    @ElementCollection
+    @CollectionTable(
+            name="Skill",
+            joinColumns = @JoinColumn(name="id"), uniqueConstraints = @UniqueConstraint(columnNames = {"ID", "SKILL"}))
+    @Column(name="skill")
     private Set<EmployeeSkill> activities;
 
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public List<Employee> getEmployees() {
+        return employees;
+    }
 
-    /* getters and setters */
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public List<Costomer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Costomer> customers) {
+        this.customers = customers;
+    }
+
+    public List<Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Set<EmployeeSkill> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(Set<EmployeeSkill> activities) {
+        this.activities = activities;
+    }
 }

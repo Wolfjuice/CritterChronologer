@@ -4,6 +4,7 @@ import com.udacity.jdnd.course3.critter.pet.Pet;
 import javax.persistence.*;
 import java.util.List;
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Costomer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
