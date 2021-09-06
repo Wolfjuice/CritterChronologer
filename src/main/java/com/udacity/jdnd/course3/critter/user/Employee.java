@@ -33,7 +33,10 @@ public class Employee {
 
 
     @JsonManagedReference
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "employees", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "schedule_id", referencedColumnName = "id"))
     private List<Schedule> schedules;
 
 

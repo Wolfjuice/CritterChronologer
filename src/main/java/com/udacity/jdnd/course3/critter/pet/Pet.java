@@ -22,7 +22,10 @@ public class Pet {
     private Costomer customer; // ownerId;
 
     @JsonManagedReference
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pets", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "pet_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "schedule_id", referencedColumnName = "id"))
     private List<Schedule> schedules;
 
     public List<Schedule> getSchedules() {
