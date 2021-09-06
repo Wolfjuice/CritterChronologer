@@ -1,8 +1,14 @@
 package com.udacity.jdnd.course3.critter.pet;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.udacity.jdnd.course3.critter.schedule.Schedule;
 import com.udacity.jdnd.course3.critter.user.Costomer;
+import com.udacity.jdnd.course3.critter.user.Employee;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 public class Pet {
     @Id
@@ -14,6 +20,19 @@ public class Pet {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ownerId")
     private Costomer customer; // ownerId;
+
+    @JsonManagedReference
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pets", cascade = CascadeType.ALL)
+    private List<Schedule> schedules;
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
+    }
+
     private LocalDate birthDate;
     private String notes;
     public Costomer getCustomer() {

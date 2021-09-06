@@ -20,7 +20,7 @@ public class ScheduleRepository {
     private static final String FIND_ALL = "select s from Schedule s";
     private static final String FIND_BY_PET = "select s from Schedule s where :pet member of s.pets";
     private static final String FIND_BY_EMPLOYEE = "select s from Schedule s where :employee member of s.employees";
-    private static final String FIND_BY_COSTOMER = "select s from Schedule s where :customer member of s.customer";
+//    private static final String PET_BY_COSTOMER = "select p from Pet p where :customer member of p.customers";
     public void persist(Schedule schedule) {
         entityManager.persist(schedule);
     }
@@ -47,12 +47,12 @@ public class ScheduleRepository {
                 .getResultList();
     }
 
-    public List<Schedule> findScheduleForCustomer(Costomer costomer){
-        return entityManager
-                .createQuery(FIND_BY_EMPLOYEE, Schedule.class)
-                .setParameter("customer", costomer)
-                .getResultList();
-    }
+//    public List<Schedule> findScheduleForCustomer(Costomer costomer){
+//        return entityManager
+//                .createQuery(FIND_BY_EMPLOYEE, Schedule.class)
+//                .setParameter("customer", costomer)
+//                .getResultList();
+//    }
 
     public void delete(Long id) {
         Schedule thisschedule = entityManager.find(Schedule.class, id);

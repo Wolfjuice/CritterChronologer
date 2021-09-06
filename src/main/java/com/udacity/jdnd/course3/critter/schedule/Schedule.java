@@ -18,16 +18,11 @@ public class Schedule {
     private Long id;
 
     @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "schedule", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "schedules", cascade = CascadeType.ALL)
     private List<Employee> employees;
 
     @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "schedule", cascade = CascadeType.ALL)
-    private List<Costomer> customers;
-
-
-    @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "schedule", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "schedules", cascade = CascadeType.ALL)
     private List<Pet> pets;
 
     private LocalDate date;
@@ -56,13 +51,6 @@ public class Schedule {
         this.employees = employees;
     }
 
-    public List<Costomer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(List<Costomer> customers) {
-        this.customers = customers;
-    }
 
     public List<Pet> getPets() {
         return pets;

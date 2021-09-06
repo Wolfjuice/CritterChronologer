@@ -43,8 +43,14 @@ public class ScheduleService {
 
     }
     public List<Schedule> getScheduleForCustomer(long customerId) {
-        Costomer av = costomerRepository.find(customerId);
-        return scheduleRepository.findScheduleForCustomer(av);
+        List<Schedule> returnMe = new ArrayList<Schedule>();
+        List<Pet> thePets = petRepository.findByOwner(customerId);
+        for(Pet onepet : thePets){
+            returnMe.addAll(scheduleRepository.findScheduleByPet(onepet));
+        }
+
+        return returnMe;
+
     }
 
 
