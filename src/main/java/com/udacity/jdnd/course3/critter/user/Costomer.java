@@ -15,6 +15,8 @@ public class Costomer {
     @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Pet> pets;
+
+
     public List<Pet> getPets() {
         return pets;
     }

@@ -32,6 +32,8 @@ public class UserController {
     public List<CustomerDTO> getAllCustomers(){
         return costomerService.getAllCustomers();
     }
+
+
     public static CustomerDTO convertCostomerToCustomerDTO(Costomer costomer){
         CustomerDTO customerDTO = new CustomerDTO();
         BeanUtils.copyProperties(costomer, customerDTO);

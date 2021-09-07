@@ -27,9 +27,12 @@ public class CostomerService {
         costomer.setName(customerDTO.getName());
         costomer.setNotes(customerDTO.getNotes());
         List<Pet> thePets = new ArrayList<>();
-        for (Long p : customerDTO.getPetIds()) {
-            thePets.add(petRepository.find(p));
+        if(customerDTO.getPetIds() != null && customerDTO.getPetIds().size() > 0){
+            for (Long p : customerDTO.getPetIds()) {
+                thePets.add(petRepository.find(p));
+            }
         }
+
         costomer.setPets(thePets);
         costomer.setPhoneNumber(customerDTO.getPhoneNumber());
         costomerRepository.persist(costomer);
@@ -44,9 +47,12 @@ public class CostomerService {
             tobereturned.setName(cust.getName());
             tobereturned.setNotes(cust.getNotes());
             List<Long> petids = new ArrayList<>();
-            for (Pet p : cust.getPets()) {
-                petids.add(p.getId());
+            if(cust.getPets() != null &&  cust.getPets().size() > 0){
+                for (Pet p : cust.getPets()) {
+                    petids.add(p.getId());
+                }
             }
+
             tobereturned.setPetIds(petids);
             tobereturned.setPhoneNumber(cust.getPhoneNumber());
             returnlist.add(tobereturned);
